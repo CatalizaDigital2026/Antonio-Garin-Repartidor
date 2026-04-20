@@ -190,6 +190,65 @@
             .contact-info { flex-direction: column; gap: 20px; }
             .footer-content { flex-direction: column; justify-content: center; text-align: center;}
         }
+
+        /* ========================================================================= */
+        /* === ESTILOS PARA EXPORTACIÓN A PDF Y MODO IMPRESIÓN (AGREGADOS AQUÍ) ==== */
+        /* ========================================================================= */
+        @media print {
+            @page {
+                margin: 0; /* Elimina márgenes de la página PDF */
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                /* Mantiene los colores de fondo si el navegador lo permite */
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact;
+                background-color: var(--brand-dark) !important;
+            }
+            
+            /* SACARLE LOS RELLENOS: Elimina paddings y márgenes excesivos para evitar huecos blancos */
+            div, span, section, header, footer {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Resetea los contenedores y los paddings globales que separan las secciones */
+            .section-padding { padding: 20px 0 !important; }
+            .container { padding: 0 15px !important; }
+            
+            /* Anular alturas mínimas enormes que causan hojas vacías en el PDF */
+            .hero, .expertise-card, .profile-section, .contact-box {
+                min-height: auto !important;
+                height: auto !important;
+            }
+
+            /* Evitar saltos de página innecesarios en elementos */
+            table, img, div, section, article {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Ocultar elementos que no tienen sentido en un PDF (Navegación, botones y widget de WhatsApp) */
+            .navbar, .floating-buttons, .btn {
+                display: none !important;
+            }
+
+            /* Forzar a que la grid se ajuste mejor al papel */
+            .expertise-grid {
+                display: block !important;
+            }
+            .expertise-card {
+                margin-bottom: 15px !important;
+                border: 1px solid var(--glass-border) !important;
+            }
+
+            /* Ajuste de márgenes específicos para que el texto no quede apilado al 100% sin padding */
+            .profile-text, .timeline-content, .filiation-item {
+                margin-bottom: 15px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -378,8 +437,6 @@
 
             <div class="contact-box glass-panel reveal active">
                 <p>Mi perfil responsable, proactivo y mi sólida experiencia en conducción y logística están a entera disposición de <strong>SAINT PEE Aguas y Sodas</strong>. Listo para aportar eficiencia y excelente servicio a su red de distribución.</p>
-
-                <a href="https://wa.me/5492613676707" target="_blank" class="btn btn-primary" style="margin-top: 20px;">Contactar por WhatsApp</a>
 
                 <div class="contact-info">
                     <div class="contact-info-item">
